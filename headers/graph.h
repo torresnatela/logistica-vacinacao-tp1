@@ -11,7 +11,7 @@ class Graph{
 
     public:
 
-        Node *adjList;
+        Node *adjList; //Vetor lista de adjacencia
         Graph(int graphLength); //Construtor
         void add_new_edge(int valueNodeAnces, int valueNodeChild); //adiciona uma nova aresta na lista de adjacencia.
 

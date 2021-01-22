@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cstdio>
+#include <string>
+#include <sstream>
 #include "headers/graph.h"
 
 int main(){
@@ -7,25 +10,47 @@ int main(){
     //Vetor Discovered para indicar quando um node ja foi descoberto.
     //Lista L[1] usada para registrar os nodes em cada layer
 
-    int graphLength;
+    std::string inputs; //String de leitura
+    int numberOfCDs, numberOfCVs, incremTemp; //Numero de CDs, numero de CV, incremento na temperatura
 
-    int *a, *b, *c;
+    //Leitura dos primeiros valores
+    getline(std::cin, inputs);
+    std::istringstream str(inputs);
 
-    //*b = 10; *a = 5; *c = 12;
+    (str >> numberOfCDs);
+    (str >> numberOfCVs);
+    (str >> incremTemp);
 
+    int graphLength = numberOfCVs+numberOfCDs; //Grafo tera os CDs e os CVs juntos.
 
+    Graph *grafoLogistica = new Graph(graphLength);
+    int nodeValue;
 
-    Graph *grafoTeste = new Graph(graphLength);
+    //Colocando CDs na Lista de Adjacencia
+    for (int i = 0; i < numberOfCDs; i++){
 
+        std::getline(std::cin, inputs); //Leitura da linha
+        std::istringstream exp(inputs);
 
-    grafoTeste->add_new_edge(0, 1);
-    grafoTeste->add_new_edge(0, 2);
-    grafoTeste->add_new_edge(0, 3);
+        while(exp >> nodeValue && nodeValue != 0){
 
-    std::cout << grafoTeste->adjList[0].next->get_nodeValue() << std::endl;
-    std::cout << grafoTeste->adjList[0].next->next->get_nodeValue() << std::endl;
-    std::cout << grafoTeste->adjList[0].next->next->next->get_nodeValue() << std::endl;
+            grafoLogistica->add_new_edge(i, nodeValue); //Adiciona o node à lista
+            
+        }
+    }
+    
+    //Colocando CVs na lista de Adjacencia
+    for(int i = numberOfCDs; i < graphLength; i++){
 
+        std::getline(std::cin, inputs);
+        std::istringstream exp(inputs);
 
+        while(exp >> nodeValue && nodeValue != 0){
+
+            grafoLogistica->add_new_edge(i, nodeValue);
+
+        }
+    }
+    
 
 }

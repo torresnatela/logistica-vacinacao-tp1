@@ -1,7 +1,7 @@
 #ifndef ___Node___
 #define ___Node____
 
-class Node
+class Node //Vertice
 {
 private:
 
